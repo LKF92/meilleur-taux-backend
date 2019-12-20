@@ -29,7 +29,7 @@ app.post("/estimate/new", async (req, res) => {
     });
 
     await newEstimate.save();
-    res.json({ message: "new rate estimate successfully created", object: newEstimate });
+    res.json({ message: "new rate estimate successfully created", estimate: newEstimate });
   } catch (error) {
     res.status(400).json(error.message);
   }

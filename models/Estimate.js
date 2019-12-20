@@ -1,12 +1,10 @@
 const mongoose = require("mongoose");
 
 const Estimate = mongoose.model("Estimate", {
-  typeOfProject: String,
   typeOfProperty: String,
   conditionOfProperty: String,
   useOfProperty: String,
   currentSituation: String,
-  advancementOfYourResearch: String,
   locationOfProperty: {
     country: String,
     city: String
@@ -16,6 +14,7 @@ const Estimate = mongoose.model("Estimate", {
     costOfRenovation: Number,
     notaryFees: Number,
     totalBudget: Number
-  }
+  },
+  email: String
 });
 module.exports = Estimate;
