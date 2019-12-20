@@ -1,8 +1,8 @@
 require("dotenv").config();
-
 const express = require("express");
 const formidable = require("express-formidable");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -11,8 +11,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Create server
 const app = express();
-// Activate formidable for our app
+// Activate formidable and cors for our app
 app.use(formidable());
+app.use(cors());
 
 // Create routes
 const estimateRoutes = require("./routes/estimate");

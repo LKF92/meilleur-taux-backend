@@ -2,6 +2,7 @@ const express = require("express");
 const app = express.Router();
 const Estimate = require("../models/Estimate");
 const User = require("../models/User");
+const uid2 = require("uid2");
 
 // ---------- CREATE ---------- \\
 app.post("/estimate/new", async (req, res) => {
@@ -14,7 +15,8 @@ app.post("/estimate/new", async (req, res) => {
       currentSituation,
       advancementOfYourResearch,
       locationOfProperty,
-      estimatedValueOfProject
+      estimatedValueOfProject,
+      email
     } = req.fields;
 
     const newEstimate = new Estimate({
@@ -25,12 +27,15 @@ app.post("/estimate/new", async (req, res) => {
       currentSituation,
       advancementOfYourResearch,
       locationOfProperty,
-      estimatedValueOfProject
+      estimatedValueOfProject,
+      email,
+      orderId: uid2(16)
     });
 
     await newEstimate.save();
-    res.json({ message: "new rate estimate successfully created", estimate: newEstimate });
+    res.json({ newEstimate });
   } catch (error) {
+    console.log(error);
     res.status(400).json(error.message);
   }
 });
