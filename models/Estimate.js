@@ -15,6 +15,7 @@ const Estimate = mongoose.model("Estimate", {
     notaryFees: Number,
     totalBudget: Number
   },
-  email: String
+  email: String,
+  orderId: String
 });
 module.exports = Estimate;
