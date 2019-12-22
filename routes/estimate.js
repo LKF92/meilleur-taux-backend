@@ -11,6 +11,8 @@ const mg = mailgun({ apiKey: API_KEY, domain: DOMAIN });
 // ---------- CREATE ---------- \\
 app.post("/estimate/new", async (req, res) => {
   try {
+    console.log("IN TRY");
+
     const {
       typeOfProject,
       typeOfProperty,
@@ -36,6 +38,7 @@ app.post("/estimate/new", async (req, res) => {
       orderId: uid2(16)
     });
     await newEstimate.save();
+    console.log("CREATED NEW ESTIMATE");
     // Create the automatic email to send for confirmation
     const data = {
       from: "Mailgun Sandbox <postmaster@" + DOMAIN + ">",
@@ -74,6 +77,7 @@ app.post("/estimate/new", async (req, res) => {
 
 // ---------- READ ---------- \\
 app.get("/estimate/", async (req, res) => {
+  console.log("GET ALL ESTIMATE");
   const estimates = await Estimate.find();
   res.json();
 });
