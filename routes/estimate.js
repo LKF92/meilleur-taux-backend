@@ -73,7 +73,7 @@ app.post("/estimate/new", async (req, res) => {
 });
 
 // ---------- READ ---------- \\
-app.get("/estimate/", async (req, res) => {
+app.get("/estimate/all", async (req, res) => {
   try {
     const estimates = await Estimate.find();
     res.json(estimates);
