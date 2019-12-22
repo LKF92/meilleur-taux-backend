@@ -77,12 +77,22 @@ app.post("/estimate/new", async (req, res) => {
 
 // ---------- READ ---------- \\
 app.get("/estimate/", async (req, res) => {
-  console.log("GET ALL ESTIMATE");
-  const estimates = await Estimate.find();
-  res.json();
+  try {
+    const estimates = await Estimate.find();
+    res.json(estimates);
+  } catch (error) {
+    res.json(error);
+  }
 });
 
-// ---------- UPDATE ---------- \\
-
 // ---------- DELETE ---------- \\
+app.post("/estimate/delete", async (req, res) => {
+  try {
+    await Estimate.deleteOne({ _id: req.fields._id });
+    res.json({ message: "Estimate successfully deleted" });
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
 module.exports = app;
